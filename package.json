@@ -1,0 +1,17 @@
+{
+  "name": "chat-analysis",
+  "version": "0.0.1",
+  "description": "Chat Analysis",
+  "main": "core.js",
+  "dependencies": {
+    "rsvp": "^3.2.1",
+    "xlsx": "^0.8.0"
+  },
+  "engines": {
+    "node": "4.4.4"
+  },
+  "keywords": [],
+  "author": "Mario Gintili",
+  "contributors": [],
+  "license": "MIT"
+}
