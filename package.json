@@ -4,6 +4,8 @@
   "description": "Chat Analysis",
   "main": "core.js",
   "dependencies": {
+    "object-keys": "^1.0.11",
+    "object-values": "^1.0.0",
     "rsvp": "^3.2.1",
     "xlsx": "^0.8.0"
   },
