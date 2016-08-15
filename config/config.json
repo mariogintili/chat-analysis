@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "mariogintili",
+    "password": null,
+    "database": "chat_analysis_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "mariogintili",
+    "password": null,
+    "database": "chat_analysis_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "mariogintili",
+    "password": null,
+    "database": "chat_analysis_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

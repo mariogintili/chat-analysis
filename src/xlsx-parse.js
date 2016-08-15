@@ -5,13 +5,13 @@ const RSVP         = require('rsvp');
 const XLSX         = require('xlsx');
 const ObjectValues = require('object-values');
 
-// const asynchronously = function(fn, ...options) {
-//   return new RSVP.Promise((resolve, reject) => {
-//     return fn(options, (e, ...rest) => {
-//       e ? reject(e) : resolve(rest);
-//     });
-//   });
-// }
+const asynchronously = function(fn, ...options) {
+  return new RSVP.Promise((resolve, reject) => {
+    return fn(options, (e, ...rest) => {
+      e ? reject(e) : resolve(rest);
+    });
+  });
+}
 
 // TODO, get all transcripts rather than just one
 const workbook = XLSX.readFile('data/transcript-20160810.xlsx');
@@ -34,7 +34,7 @@ const headers  = {
   R: 'prechat-survey'
 };
 const documentIds = ObjectValues(headers);
-const out = { data: [] };
+const out = [];
 
 
 // Sheet relevant values
@@ -53,12 +53,12 @@ rows.forEach((row) => {
 
   row.forEach((cellId, i) => {
     let value = sheet[cellId];
-
     if (typeof value !== 'undefined' && value.v) {
-      parsedDocument[documentIds[i]] = sheet[cellId].v;
+      parsedDocument[documentIds[i]] = value.v;
     }
   });
-  out.data.push(parsedDocument);
+
+  out.push(parsedDocument);
 });
 
 fs.writeFileSync('out/parsed.json', JSON.stringify(out, null, '\t'), 'utf8');
