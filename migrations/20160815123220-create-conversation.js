@@ -3,19 +3,29 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.createTable('conversations', {
-      id: Sequelize.INTEGER,
-      'start-time': Sequelize.INTEGER,
-      'end-time': Sequelize.INTEGER,
-      'interaction-id': Sequelize.STRING,
-      'agent-id': Sequelize.STRING,
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      startTime: Sequelize.INTEGER,
+      endTime: Sequelize.INTEGER,
+      interactionId: Sequelize.STRING,
+      agentId: Sequelize.STRING,
       queue: Sequelize.STRING,
-      'source-category': Sequelize.STRING,
-      'customer-name': Sequelize.STRING,
+      sourceCategory: Sequelize.STRING,
+      customerName: Sequelize.STRING,
       email: Sequelize.STRING,
       phone: Sequelize.STRING,
       conversation: Sequelize.JSON,
-      'exit-survey': Sequelize.TEXT,
-      'prechat-survey': Sequelize.TEXT
+      exitSurvey: Sequelize.TEXT,
+      prechatSurvey: Sequelize.TEXT,
+      createdAt: {
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        type: Sequelize.DATE
+      },
     });
   },
 
