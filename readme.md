@@ -11,9 +11,11 @@ You will need
 - [Node.js](https://nodejs.org/en/)
 - [Jupyter Notebook](http://jupyter.org/)
 
-You will also need to create a database called `chat_analysis` - make sure this is created before running the setup task.
-After that's set just `bin/run` for setup and you will have all the data available inside a `conversations` table inside your database.
+# Installation
+
+- Create a pg database called `chat_analysis`
+- execute `bin/run`
+
+:warning: Alternatively you can just use the `dump` pg export found at the root of this project.
 
 What you do with it is up for you to decide 💂
-
-:warning: Alternative you can just use the `dump` pg export found at the root of this project.
