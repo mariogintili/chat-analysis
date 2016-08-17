@@ -1,10 +1,11 @@
 'use strict';
 
-const Sequelize = require('sequelize');
-const moment    = require('moment');
-const Promise   = require("bluebird");
-const data      = require('../out/parsed.json');
-const sequelize = new Sequelize('chat_analysis_development', 'mariogintili', null, { host: 'localhost', dialect: 'postgres' });
+const Sequelize          = require('sequelize');
+const moment             = require('moment');
+const Promise            = require("bluebird");
+const data               = require('../out/parsed.json');
+const { development }    = require('../config/config.json');
+const sequelize          = new Sequelize(development.database, development.username, development.password, { host: development.host, dialect: development.dialect });
 
 // utils
 const LENGTH_OF_TIMESTAMP = 11;
