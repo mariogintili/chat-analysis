@@ -16,3 +16,4 @@ After that's set just `bin/run` for setup and you will have all the data availab
 
 What you do with it is up for you to decide 💂
 
+:warning: Alternative you can just use the `dump` pg export found at the root of this project.
