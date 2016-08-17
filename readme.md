@@ -1,8 +1,18 @@
-# chat-analysis :godmode:
+# chat-analysis 🤖
 
-Still very early days, few things needed to do now:
+In this project you will find a small example of how you can leverage data science and simple scripting
+to come up with interesting insights about your business 🦄
 
-- [ ] Turn Conversations into data structures
-- [ ] `bin/scrub`
-- [ ] `bin/analysis`
-- [ ] Project structure
+# Setup
+
+You will need
+
+- [Postgresql](https://www.postgresql.org/)
+- [Node.js](https://nodejs.org/en/)
+- [Jupyter Notebook](http://jupyter.org/)
+
+You will also need to create a database called `chat_analysis` - make sure this is created before running the setup task.
+After that's set just `bin/run` for setup and you will have all the data available inside a `conversations` table inside your database.
+
+What you do with it is up for you to decide 💂
+

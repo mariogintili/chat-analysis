@@ -8,18 +8,15 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      startTime: Sequelize.INTEGER,
-      endTime: Sequelize.INTEGER,
+      startTime: Sequelize.STRING,
+      endTime: Sequelize.STRING,
       interactionId: Sequelize.STRING,
       agentId: Sequelize.STRING,
       queue: Sequelize.STRING,
       sourceCategory: Sequelize.STRING,
       customerName: Sequelize.STRING,
-      email: Sequelize.STRING,
-      phone: Sequelize.STRING,
-      conversation: Sequelize.JSON,
+      conversation: Sequelize.TEXT,
       exitSurvey: Sequelize.TEXT,
-      prechatSurvey: Sequelize.TEXT,
       createdAt: {
         type: Sequelize.DATE
       },

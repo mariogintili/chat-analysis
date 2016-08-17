@@ -5,17 +5,7 @@ const RSVP         = require('rsvp');
 const XLSX         = require('xlsx');
 const ObjectValues = require('object-values');
 
-const asynchronously = function(fn, ...options) {
-  return new RSVP.Promise((resolve, reject) => {
-    return fn(options, (e, ...rest) => {
-      e ? reject(e) : resolve(rest);
-    });
-  });
-}
-
-// TODO, get all transcripts rather than just one
 const workbook = XLSX.readFile('data/transcript-20160810.xlsx');
-
 const sheet    = workbook.Sheets[workbook.SheetNames[0]];
 const rows     = [];
 const headers  = {

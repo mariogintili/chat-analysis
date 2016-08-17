@@ -1,0 +1,23 @@
+#!/bin/bash
+
+sequelize_exists() {
+  [ `type -t sequelize`"" == 'function' ]
+}
+
+npm "install"
+
+if ! [ sequelize_exists ]
+  then
+  echo "installing sequelize"
+  npm "install -g sequelize"
+fi
+
+echo "👽  Starting Data scrub"
+echo "Parsing xlsx file to JSON"
+node "src/xlsx-parse"
+echo "Parsing XSLX file to JSON completed  🌞"
+echo "Creating conversations table in the database - if this fails make sure config/config.json's configuration matches yours!"
+sequelize "db:migrate"
+echo "Scraping conversations now - then we upload to PG"
+node "src/upload-to-db.js"
+echo "Finished uploading to DB!"
