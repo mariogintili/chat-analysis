@@ -4,27 +4,15 @@ const fs           = require('fs');
 const RSVP         = require('rsvp');
 const XLSX         = require('xlsx');
 const ObjectValues = require('object-values');
+const xlsxMapping  = require('../config/sheet-mappings.json');
+const { headers }  = xlsxMapping;
+const documentIds  = ObjectValues(headers);
 
+// Part of a function
 const workbook = XLSX.readFile('data/transcript-20160810.xlsx');
 const sheet    = workbook.Sheets[workbook.SheetNames[0]];
 const rows     = [];
-const headers  = {
-  E: 'start-time',
-  F: 'end-time',
-  G: 'interaction-id',
-  H: 'agent-id',
-  J: 'agent',
-  K: 'queue',
-  L: 'source-category',
-  M: 'customer-name',
-  N: 'email',
-  O: 'phone',
-  P: 'chat-log',
-  Q: 'exit-survey',
-  R: 'prechat-survey'
-};
-const documentIds = ObjectValues(headers);
-const out = [];
+const out      = [];
 
 
 // Sheet relevant values
