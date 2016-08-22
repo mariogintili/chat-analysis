@@ -12,46 +12,13 @@ const R                             = require('ramda');
 const createXlsxSheet               = require('../app/utils/create-xlsx-sheet.js');
 const buildXlsxIndexes              = require('../app/utils/build-xlsx-indexes.js');
 
-// const AVERAGE_END_OF_HEADERS        = 10;
-// const TARGET_HEADER                 = 'Start Time';
-// let sheet = createXlsxSheet('data/Transcript-20160810.xlsx');
-
-// let firstOne;
-// let lastOne;
-
-// A_TO_Z.some((letter) => {
-//   for (let i = 0;AVERAGE_END_OF_HEADERS >= i; i++) {
-//     let key = `${letter}${i}`;
-
-//     if ((sheet[key] !== undefined) && sheet[key].v === TARGET_HEADER) {
-//       firstOne = `${letter}${i + 1}`;
-//       console.log(firstOne);
-//     }
-//   }
-
-//   return firstOne;
-// });
-
-// let lastOneIndex = Number(firstOne.split('')[1]);
-// let columnName = firstOne.split('')[0];
-
-// while (!lastOne) {
-//   let key = `${columnName}${lastOneIndex}`;
-
-//   if (sheet[key] === undefined) {
-//     lastOne = `${columnName}${lastOneIndex - 1}`;
-//     console.log(lastOne);
-//   }
-
-//   lastOneIndex++;
-// }
-
 let parseableFiles = fs.readdirSync('data').filter((filename) => filename.includes('xlsx')).map((filename) => {
   return `data/${filename}`;
 });
 
-// console.log(parseableFiles);
-parseableFiles.map(createXlsxSheet).forEach(buildXlsxIndexes);
+let createXlsxAndBuildIndexes = R.pipe(createXlsxSheet, buildXlsxIndexes);
+
+R.map(createXlsxAndBuildIndexes, parseableFiles);
 
 // DB.sync().then(() => {
 //   return Promise.all(data.map((row) => {
