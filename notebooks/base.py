@@ -28,12 +28,18 @@ def conversations_abandoned_chart():
   return conversation_happened_series.plot.pie(labels=['Started', 'Abandoned'], colors=['b', 'r'], autopct='%.2f', fontsize=20, figsize=(6, 6))
 
 
-def conversations_abandoned_by_referral_platform():
-  dataframe = build_dataframe('SELECT * from conversations;')
-  failed_conversations = []
+def conversations_by_referral_platform():
+  dataframe   = build_dataframe('SELECT * from conversations;')
+  labels      = list(build_dataframe('SELECT DISTINCT queue from conversations;')['queue'])
+  labels_dict = {}
 
-  for convo in dataframe['conversation']:
-    conversation_document = json.loads(convo)
-    if len(conversation_document) < 0:
-      failed_conversations.append(conversation_document)
+  # initialize dict
+  for label in labels:
+    labels_dict[label] = 0
 
+  for _row in dataframe.iterrows():
+    row = _row[1]
+    labels_dict[row['queue']] = labels_dict[row['queue']] + 1
+
+  series = pandas.Series(labels_dict.values(), index=labels, name='Chats by referral queue')
+  return series.plot.pie(labels=labels, fontsize=8, figsize=[10, 10], labeldistance=3)
