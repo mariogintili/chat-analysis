@@ -1,11 +1,12 @@
 const TIMESTAMP_LENGTH = require('../constants/timestamp-length.js');
+const extractFirstName = require('./extract-first-name.js');
 
-var buildParseConversationOptions = (row) => {
+var buildParseConversationOptions = ([agentName, clientName]) => {
   let opts = {};
-  opts.agentName         = extractFirstName(row.agent);
-  opts.clientName        = row['customer-name'];
+  opts.agentName         = extractFirstName(agentName);
+  opts.clientName        = clientName;
   opts.agentLabelLength  = opts.agentName.length + TIMESTAMP_LENGTH;
-  opts.clientLabelLength = row['customer-name'].length + TIMESTAMP_LENGTH;
+  opts.clientLabelLength = clientName.length + TIMESTAMP_LENGTH;
   return opts;
 };
 

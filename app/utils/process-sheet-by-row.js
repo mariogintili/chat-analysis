@@ -7,18 +7,7 @@ const { headers }         = xlsxMapping;
 const _getRowIndexes      = require('../utils/-get-row-indexes.js');
 const _startAndEndIndexes = require('../utils/-start-and-end-indexes.js');
 const indexToCells        = require('../utils/index-to-cells.js');
-
-const writeCell = (sheet) => {
-  return (indexCollection) => {
-    let row = [];
-
-    forEach((cellIndex) => {
-      if (sheet[cellIndex]) {
-        row.push(sheet[cellIndex].v);
-      }
-    }, indexCollection);
-  }
-};
+const writeCell           = require('../utils/write-cell.js');
 
 const processSheetByRow = (sheet) => {
   let [
