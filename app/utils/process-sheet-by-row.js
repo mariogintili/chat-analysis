@@ -1,26 +1,12 @@
-const A_TO_Z         = require('../constants/a-to-z.js');
-const xlsxMapping    = require('../../config/sheet-mappings.json');
-const _getRowIndexes = require('../utils/-get-row-indexes.js');
-
-const { headers }    = xlsxMapping;
 const { range,
-        splitEvery,
         map,
-        forEach,
-        pipe }  = require('ramda');
+        forEach }  = require('ramda');
 
-
-const _getStartAndEndIndexes = (array) => {
-  return array.map((cellIndex) => Number(cellIndex.replace(/\D/g,'')));
-};
-
-const _buildCells = (index, keys) => {
-  return keys.map((key) => `${key}${index}`);
-};
-
-const indexToCells = (keys) => {
-  return (index) => _buildCells(index, keys);
-};
+const xlsxMapping         = require('../../config/sheet-mappings.json');
+const { headers }         = xlsxMapping;
+const _getRowIndexes      = require('../utils/-get-row-indexes.js');
+const _startAndEndIndexes = require('../utils/-start-and-end-indexes.js');
+const indexToCells        = require('../utils/index-to-cells.js');
 
 const writeCell = (sheet) => {
   return (indexCollection) => {
@@ -31,11 +17,10 @@ const writeCell = (sheet) => {
         row.push(sheet[cellIndex].v);
       }
     }, indexCollection);
-
   }
 };
 
-var processSheetByRow = (sheet) => {
+const processSheetByRow = (sheet) => {
   let [
         firstCell,
         lastCell
@@ -44,7 +29,7 @@ var processSheetByRow = (sheet) => {
   let [
         firstIndex,
         lastIndex
-      ] = _getStartAndEndIndexes([firstCell, lastCell]);
+      ] = _startAndEndIndexes([firstCell, lastCell]);
 
   let keys = Object.keys(headers);
 
