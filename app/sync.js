@@ -1,24 +1,18 @@
 const fs                            = require('fs');
-const Sequelize                     = require('sequelize');
-const moment                        = require('moment');
 const Promise                       = require("bluebird");
 const data                          = require('../out/parsed.json');
 const DB                            = require('../app/db.js');
 const Conversation                  = require('../app/models/conversation.js');
 const parseConversation             = require('../app/utils/parse-conversation.js');
-const extractFirstName              = require('../app/utils/extract-first-name.js');
 const buildParseConversationOptions = require('../app/utils/build-parse-conversation-options.js');
-const R                             = require('ramda');
+const { pipe, forEach }             = require('ramda');
 const createXlsxSheet               = require('../app/utils/create-xlsx-sheet.js');
-const buildXlsxIndexes              = require('../app/utils/build-xlsx-indexes.js');
+const processSheetByRow             = require('../app/utils/process-sheet-by-row.js');
+const filterForXlsxFiles            = require('../app/utils/filter-for-xlsx-files.js');
 
-let parseableFiles = fs.readdirSync('data').filter((filename) => filename.includes('xlsx')).map((filename) => {
-  return `data/${filename}`;
-});
+let parseableFiles = filterForXlsxFiles(fs.readdirSync('data'));
 
-let createXlsxAndBuildIndexes = R.pipe(createXlsxSheet, buildXlsxIndexes);
-
-R.map(createXlsxAndBuildIndexes, parseableFiles);
+forEach(pipe(createXlsxSheet, processSheetByRow), parseableFiles);
 
 // DB.sync().then(() => {
 //   return Promise.all(data.map((row) => {

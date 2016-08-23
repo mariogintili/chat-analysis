@@ -1,0 +1,3 @@
+const AVERAGE_END_OF_HEADERS = 10;
+
+module.exports = AVERAGE_END_OF_HEADERS;

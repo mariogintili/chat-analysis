@@ -4,7 +4,9 @@ var createXlsxSheet = (filename) => {
   let book;
   try {
 
-    book = XLSX.readFile(filename);
+    book = XLSX.readFile(`data/${filename}`);
+    console.log(`data/${filename}`);
+
   } catch (e) {
     console.log('failed to read ' + filename);
   }
