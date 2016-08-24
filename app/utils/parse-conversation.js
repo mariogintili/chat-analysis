@@ -14,8 +14,6 @@ var parseConversation = function(str, store, options) {
   }
 
   let message = string.slice(tuples[0], tuples[1]);
-  // TODO: fix this
-  console.log(JSON.stringify({ isSupport, text: message, indexOfClient, indexOfAgent }, null, '\t'));
 
   if ((0 > indexOfClient && message === '') || (0 > indexOfAgent && message === '')) {
     return;

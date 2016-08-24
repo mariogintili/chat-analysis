@@ -16,13 +16,31 @@ const fetchValues = (sheet) => {
   };
 };
 
-const insertRow = ([startTime, endTime, interactionId, agentId, agentName, queue, sourceCategory, customerName, conversationString, exitSurvey]) => {
+const insertRow = ([startTime, endTime, interactionId, agentId, agentName, queue, sourceCategory, customerName, _email, _phone, conversationString, exitSurvey]) => {
   let conversation = [];
-  parseConversation(conversationString, conversation, buildParseConversationOptions([agentName, customerName]));
+  if (conversationString) {
+    parseConversation(conversationString, conversation, buildParseConversationOptions([agentName, customerName]));
+  }
+  DB.sync().then(() => {
+    Promise.resolve(Conversation.create({
+      startTime,
+      endTime,
+      interactionId,
+      agentId,
+      agentName,
+      queue,
+      sourceCategory,
+      customerName,
+      conversation: JSON.stringify(conversation),
+      exitSurvey
+    }));
+  });
 };
 
 const writeCell = (sheet) => {
-  return (arrayOfCellIndexes) => insertRow(map(fetchValues(sheet), arrayOfCellIndexes));
+  return (arrayOfCellIndexes) => {
+    return insertRow(map(fetchValues(sheet), arrayOfCellIndexes));
+  };
 };
 
 module.exports = writeCell;
