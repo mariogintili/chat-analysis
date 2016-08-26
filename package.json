@@ -9,6 +9,7 @@
     "object-keys": "^1.0.11",
     "object-values": "^1.0.0",
     "pg": "^6.1.0",
+    "ramda": "^0.22.1",
     "rsvp": "^3.2.1",
     "sequelize": "^3.24.0",
     "sequelize-cli": "^2.4.0",

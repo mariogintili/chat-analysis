@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "E": "start-time",
+    "F": "end-time",
+    "G": "interaction-id",
+    "H": "agent-id",
+    "J": "agent",
+    "K": "queue",
+    "L": "source-category",
+    "M": "customer-name",
+    "N": "email",
+    "O": "phone",
+    "P": "chat-log",
+    "Q": "exit-survey",
+    "R": "prechat-survey"
+  }
+}

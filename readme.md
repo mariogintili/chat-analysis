@@ -13,9 +13,68 @@ You will need
 
 # Installation
 
-- Create a pg database called `chat_analysis`
-- execute `bin/run`
+- Modify the settings on `config/config.json` to match your local environment. This includes database name, user, etc
 
-:warning: Alternatively you can just use the `dump` pg export found at the root of this project.
+- Create a database matching the settings you've specified
 
-What you do with it is up for you to decide 💂
+- `$ npm install`
+
+- `$ node_modules/sequelize-cli/bin/sequelize db:migrate`
+
+- Now your project should be ready.
+
+# Usage
+
+- Load transcripts into the `data` folder - they should be an XLSX file matching the format our customer agent service has provided - feel free to ping [@mariogintili](https://github.com/mariogintili) for details on this if need be.
+
+- run `$ node app/sync.js`
+
+# Contributing
+
+- Check out from `master`
+
+- Submit a PR
+
+# Usage 🔮
+
+As defined on on the conversation model the data is stored in one table, following this structure:
+
+```javascript
+  id: {
+    type: INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  startTime: STRING,
+  endTime: STRING,
+  interactionId: STRING,
+  agentId: STRING,
+  queue: STRING,
+  sourceCategory: STRING,
+  customerName: STRING,
+  conversation: TEXT,
+  exitSurvey: TEXT,
+  createdAt: {
+    type: DATE
+  },
+  updatedAt: {
+    type: DATE
+  }
+```
+
+However, one thing to note is that the `conversation` field is a `text` field storing a serialized and valid JSON object. This is made out of ease of segmentation based the authors of the messages for a given conversation. Which follows this schema:
+
+```javascript
+[
+	{
+		isSupport: true,
+		message: "Hello angry client, how may I help you?"
+	},
+	{
+		isSupport: false,
+		message: "I am very angry at your service"
+	}
+]
+```
+
+⚠️ This field is a string - if you want to make use of the structure you'll need to parse this as JSON. `JSON.parse`
