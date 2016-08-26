@@ -7,6 +7,4 @@ const { pipe, forEach, splitEvery }  = require('ramda');
 let groupsOfFiles    = splitEvery(3, filterForXlsxFiles(fs.readdirSync('data')).sort());
 let createAndProcess = pipe(createXlsxSheet, processSheetByRow);
 
-forEach((fileList) => {
-  forEach(createAndProcess, fileList);
-}, groupsOfFiles);
+forEach((fileList) => forEach(createAndProcess, fileList), groupsOfFiles);

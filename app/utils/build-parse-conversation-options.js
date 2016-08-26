@@ -1,7 +1,7 @@
 const TIMESTAMP_LENGTH = require('../constants/timestamp-length.js');
 const extractFirstName = require('./extract-first-name.js');
 
-var buildParseConversationOptions = ([agentName, clientName]) => {
+const buildParseConversationOptions = ([agentName, clientName]) => {
   let opts = {};
   opts.agentName         = extractFirstName(agentName);
   opts.clientName        = clientName;

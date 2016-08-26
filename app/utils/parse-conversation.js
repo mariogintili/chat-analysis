@@ -1,4 +1,4 @@
-var parseConversation = function(str, store, options) {
+const parseConversation = function(str, store, options) {
   let tuples = [];
   let string = String(str);
   let indexOfAgent  = string.indexOf(options.agentName);

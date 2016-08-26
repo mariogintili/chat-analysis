@@ -1,6 +1,6 @@
 const XLSX = require('xlsx');
 
-var createXlsxSheet = (filename) => {
+const createXlsxSheet = (filename) => {
   let book;
   try {
 
